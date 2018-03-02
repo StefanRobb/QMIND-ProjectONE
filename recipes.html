@@ -16,7 +16,7 @@
       <div class="col-lg-6">
         <div class="input-group">
           &nbsp;&nbsp;
-          <input type="text" class="form-control" placeholder="Ingredient Name" />&nbsp;&nbsp;
+          <input type="text" class="form-control" placeholder="Ingredient Name" list="ingredients" autocomplete="on" />&nbsp;&nbsp;
           <input type="text" class="form-control" placeholder="Quantity" />&nbsp;&nbsp;
           <select class="form-control">
             <option value="" disabled selected>Measurement</option>
@@ -31,24 +31,36 @@
     </div>
   </div>
   <hr />
+  <datalist id="ingredients" autocomplete="on">
+
+  </datalist>
   &nbsp;&nbsp;<button type="button" class="btn btn-primary" onclick="add()"><i class="fa fa-plus" aria-hidden="true"></i></button>
   &nbsp;&nbsp;<button type="button" class="btn btn-primary" onclick="remove()"><i class="fa fa-minus" aria-hidden="true"></i></button>
   <!-- /.row -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.5.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="ingredientslist.json"></script>
 </body>
 
 </html>
 <script>
+  var ingredients = JSON.parse(data).ingredientslist
+  for(var prop in ingredients){
+    var option = document.createElement("option")
+    option.value = prop
+    document.getElementById("ingredients").appendChild(option)
+    console.log(prop)
+  }
+  console.log(document.getElementById("ingredients"))
   var add = function(){
     var div = document.createElement('div')
     div.className = 'row'
-    div.id = '1'
     div.innerHTML = '<div class="col-lg-6">\
       <div class="input-group">\
         &nbsp;&nbsp;\
-        <input type="text" class="form-control" placeholder="Ingredient Name" />&nbsp;&nbsp;\
+        <input type="text" class="form-control" placeholder="Ingredient Name" list="ingredients" autocomplete="on" />&nbsp;&nbsp;\
         <input type="text" class="form-control" placeholder="Quantity" />&nbsp;&nbsp;\
         <select class="form-control">\
           <option value="" disabled selected>Measurement</option>\
@@ -65,6 +77,9 @@
 
   var remove = function(){
     var div = document.getElementsByClassName('row')
-    document.getElementById('content').removeChild(div[div.length-1]);
+    if(div.length > 1){
+    document.getElementById('content').removeChild(div[div.length-1])
+    }
   }
+
 </script>

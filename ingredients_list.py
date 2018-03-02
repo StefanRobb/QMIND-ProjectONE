@@ -14,3 +14,4 @@ for recipe in data['recipes']:
 final_dict = {'ingredients list':ing_list}
 with open('ingredients_list.json', 'w') as fp:
     json.dump(final_dict, fp)
+print(len(ing_list))
