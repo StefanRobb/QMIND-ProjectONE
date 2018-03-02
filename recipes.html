@@ -64,7 +64,7 @@
   }
 
   var remove = function(){
-    var div = document.getElementById('1')
-    document.getElementById('content').removeChild(div);
+    var div = document.getElementsByClassName('row')
+    document.getElementById('content').removeChild(div[div.length-1]);
   }
 </script>
